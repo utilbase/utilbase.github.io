@@ -1,6 +1,4 @@
-
 (() => {
-
 const i = { v2: class extends Array {
       constructor(x = 0, y = x) {
         super(x, y);
@@ -12,11 +10,8 @@ const i = { v2: class extends Array {
     set x(v) { this[0] = v }
     set y(v) { this[1] = v }
 
-  toString() { return `x: ${this[0]} y: ${this[1]}` }
-
   set(x, y = x) {
     if (x.length) return this.copy(x);
-
     this[0] = x
     this[1] = y
     return this;
@@ -128,9 +123,7 @@ const i = { v2: class extends Array {
     return this;
   }
 
-  clone() {
-    return new v2(this[0], this[1]);
-  }
+  clone() { return new i.v2(this[0], this[1]) }
 }}
 
 window.v2 = function (x, y) { return new i.v2(x, y) }
