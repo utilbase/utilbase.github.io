@@ -1,5 +1,5 @@
 (() => {
-const i = { v2: class extends Array {
+const scope = { v2: class extends Array {
       constructor(x = 0, y = x) {
         super(x, y);
         return this;
@@ -123,19 +123,21 @@ const i = { v2: class extends Array {
     return this;
   }
 
-  clone() { return new i.v2(this[0], this[1]) }
+  clone() { return new scope.v2(this[0], this[1]) }
 }}
 
-window.v2 = function (x, y) { return new i.v2(x, y) }
+const { v2: V2 } = scope
 
-v2.up = () => new i.v2(0, 1);
-v2.down = () => new i.v2(0, -1);
-v2.left = () => new i.v2(-1, 0);
-v2.right = () => new i.v2(1, 0);
-v2.negInfinity = () => new i.v2(-Infinity, -Infinity);
-v2.infinity = () => new i.v2(Infinity, Infinity);
-v2.one = () => new i.v2(1, 1);
-v2.zero = () => new i.v2(0, 0);
+window.v2 = function (x, y) { return new V2(x, y) }
+
+v2.up = () => new V2(0, 1);
+v2.down = () => new V2(0, -1);
+v2.left = () => new V2(-1, 0);
+v2.right = () => new V2(1, 0);
+v2.negInfinity = () => new V2(-Infinity, -Infinity);
+v2.infinity = () => new V2(Infinity, Infinity);
+v2.one = () => new V2(1, 1);
+v2.zero = () => new V2(0, 0);
 v2.angle = v => Math.atan2(v[1], v[0]);
 v2.constant = Object.freeze(v2.zero())
 })()
